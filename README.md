@@ -18,5 +18,20 @@ Before you can view your application online, you need to have it set up with Str
 ### Deliverables
 
 - [ ] An interactive data science or machine learning application using Streamlit.
-- [ ] The URL at the top of this readme needs to point to your application online. It should also list the names of the team members. 
+- [ ] The URL at the top of this readme needs to point to your application online. It should also list the names of the team members.
 - [ ] A write-up that describes the goals of your application, justifies design decisions, and gives an overview of your development process. Use the `writeup.md` file in this repository. You may add more sections to the document than the template has right now.
+
+
+### How to use Git
+
+README.md: Update for documentation
+.gitignore: Add any files that you want to ignore locally
+
+git status: Check the current status
+
+1. Fix the file
+2. git add
+3. git commit
+4. git push
+
+
