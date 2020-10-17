@@ -34,4 +34,17 @@ git status: Check the current status
 3. git commit
 4. git push
 
+### Data Description (new ones)
+* business.csv
+** `garage`, `street`, `validated`, `lot`, `valet`: Boolean parking information
+** `dj`, `background_music`, `no_music`, `jukebox`, `live`, `video`, `karaoke`: Boolean music information (whethey business uses these musics)
+** `dessert`, `latenight`, `lunch`, `dinner`, `brunch`, `breakfast`: Type of food the restaurant is appropriate for
+* review.csv
+** I used (Vader)[https://github.com/cjhutto/vaderSentiment] and converted`text` column into four additional (one being the highest and zero being the lowest):
+** `neg`: negative sentiment 
+** `pos`: positive sentiment
+** `neu`: neutral sentiment
+** `compound`: compound sentiment (normalized aggregate sentiment)
 
+
+###
