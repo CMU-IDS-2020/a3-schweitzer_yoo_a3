@@ -36,8 +36,8 @@ git status: Check the current status
 
 ### Data Description (new ones)
 * business.csv
-** `garage`, `street`, `validated`, `lot`, `valet`: Boolean parking information
-** `dj`, `background_music`, `no_music`, `jukebox`, `live`, `video`, `karaoke`: Boolean music information (whethey business uses these musics)
+    * `garage`, `street`, `validated`, `lot`, `valet`: Boolean parking information
+    `dj`, `background_music`, `no_music`, `jukebox`, `live`, `video`, `karaoke`: Boolean music information (whethey business uses these musics)
 ** `dessert`, `latenight`, `lunch`, `dinner`, `brunch`, `breakfast`: Type of food the restaurant is appropriate for
 * review.csv
 ** I used (Vader)[https://github.com/cjhutto/vaderSentiment] and converted`text` column into four additional (one being the highest and zero being the lowest):
