@@ -13,7 +13,6 @@ import pydeck as pdk
 import warnings
 warnings.filterwarnings('ignore')
 # SETTING PAGE CONFIG TO WIDE MODE
-st.beta_set_page_config(layout="wide")
 
 ################################################################################
 # DATA SETUP
