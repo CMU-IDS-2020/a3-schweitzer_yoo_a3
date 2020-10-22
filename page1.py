@@ -60,7 +60,6 @@ def app():
     # Maps
     ################################################################################
     # MAP VISUALIZATION
-    st.write('Select one of the three sentiments below to see the concentration of each overtime:')
     # break apart data into city specific data
     pittsburghData = bData.loc[bData['city'] == 'Pittsburgh']
     montrealData = bData.loc[bData['city'] == 'Montréal']
