@@ -16,7 +16,7 @@ Our project goals are twofold. We want to provide a tool for both a higher-level
 
 TODO: **A rationale for your design decisions.** How did you choose your particular visual encodings and interaction techniques? What alternatives did you consider and how did you arrive at your ultimate choices?
 
-**TAB 1**: Macro-City View
+**TAB 1**: Macro-City View\
 To address **Q1**, we created a viewport allowing a user to view four maps. Maps show restaurant data for Pittsburgh, Montreal, Cleveland, and Toronto. Users can specify a range of stars (1 to 5) with which to filter the data. Maps update to show all restaurants within that star range. A graph below shows how negative, positive, and neutral preference has changed overtime. Users can select select between three buttons ('Negative,' 'Positive,' and 'Neutral') to specify a the sentement of reviews and ratings. The chart updates, colorizing the degree of negativity/positivity/neutrality over each year of submitted reviews to reflect the strength of sentiment. The size of each circle on the graph remains the same and showcases the total number or reviews submitted over time for each. In this view users cannot see the specific data of each city to reduce the over-saturation of information and keep the focus around restaurant sentiment.
 
 **TAB 2**: Individual View
