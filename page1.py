@@ -54,7 +54,7 @@ def app():
     # Titles and Information
     ################################################################################
     st.title('Explore City-Wide Restaurant Reviews')
-    st.subheader('Check out the ratings of restaurants in Pittsburgh and other major cities, their reviews, and what they have to offer.')
+    st.subheader('Check out the ratings of restaurants in Pittsburgh and other major cities, their reviews, and their sentiment over time.')
    
     ################################################################################
     # Maps
