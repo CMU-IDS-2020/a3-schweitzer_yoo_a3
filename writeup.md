@@ -3,19 +3,19 @@
 ![A screenshot of macro view. Could be a GIF.](macroViewA3.jpg)
 ![A screenshot of individual view. Could be a GIF.](individualViewA3.jpg)
 
-TODO: Short abstract describing the main goals and how you achieved them.
+![TODO: Short abstract describing the main goals and how you achieved them.]
 
 Restaurants - there's a lot to learn about them.  from their ratings, and their review trends. Whether you're someone who likes food, a business owner, or a city planner -- restaurant ratings, characteristics, and over-time data projection offer a great deal of insight. \\This web-app allows users to view two tabs which illuminate this data, configured from Yelp business and review data. Each tab allows users to focus in on a high-level look at city review trends or low-level restaurant-specific infomration. Viewports can be used individually to narrow in on high or low level specific questions, or used together for in depth analysis of overtime trends and projections.
 
 ## Project Goals
 
-TODO: **A clear description of the goals of your project.** Describe the question that you are enabling a user to answer. The question should be compelling and the solution should be focused on helping users achieve their goals. 
+![TODO: **A clear description of the goals of your project.** Describe the question that you are enabling a user to answer. The question should be compelling and the solution should be focused on helping users achieve their goals. ]
 
 Our project goals are twofold. We want to provide a tool for both a higher-level and lower-level look at restaurant data. For a business owner or city planner, the first question **(Q1)** is 'how have prefernce sentiment (negative, positive, or neutral) changed overtime and how do these vary between cities?' For a general user, the second question **(Q2)** is 'how can a restaurant search be configured to an in individual's taste and preferences?'
 
 ## Design
 
-TODO: **A rationale for your design decisions.** How did you choose your particular visual encodings and interaction techniques? What alternatives did you consider and how did you arrive at your ultimate choices?
+![TODO: **A rationale for your design decisions.** How did you choose your particular visual encodings and interaction techniques? What alternatives did you consider and how did you arrive at your ultimate choices?]
 
 **TAB 1**: Macro-City View\
 To address **Q1**, we created a viewport allowing a user to view four maps. Maps show restaurant data for Pittsburgh, Montreal, Cleveland, and Toronto. Users can specify a range of stars (1 to 5) with which to filter the data. Maps update to show all restaurants within that star range. A graph below shows how negative, positive, and neutral preference has changed overtime. Users can select select between three buttons ('Negative,' 'Positive,' and 'Neutral') to specify a the sentement of reviews and ratings. The chart updates, colorizing the degree of negativity/positivity/neutrality over each year of submitted reviews to reflect the strength of sentiment. The size of each circle on the graph remains the same and showcases the total number or reviews submitted over time for each. In this view users cannot see the specific data of each city to reduce the over-saturation of information and keep the focus around restaurant sentiment.
@@ -25,7 +25,7 @@ To address **Q1**, we created a viewport allowing a user to view four maps. Maps
 
 ## Development
 
-TODO: **An overview of your development process.** Describe how the work was split among the team members. Include a commentary on the development process, including answers to the following questions: Roughly how much time did you spend developing your application (in people-hours)? What aspects took the most time?
+![TODO: **An overview of your development process.** Describe how the work was split among the team members. Include a commentary on the development process, including answers to the following questions: Roughly how much time did you spend developing your application (in people-hours)? What aspects took the most time?]
 
 The development process developed within several stages articulated below. Total development time took roughly 92 hours total **< Not exactly sure how much time I put in, but we've met almost every day since last week Saturday = 7hrs x 2 = 14hrs. Spent most of the day each Saturday and Sunday = 16hrs x 2 = 32hrs. Plus initial brainstorming and development time = 8hrs x 2 = 16hrs. And then the development process now, maybe 5ish hrs each day Mon, Tues, Wed, and today? So that'd be (5hrs x 3days) x 2 = 30hrs. In total that'd be 92hrs. Sound about right to you Clay? >**. Figuring out Streamlit, between understanding its processing power, speed, abilities, configuration, and ability to interface with Altair, took the most time at maybe 50%. Debugging came in second for time consumption at around 30%, with the integration process taking maybe 20%. \
 
@@ -43,10 +43,10 @@ Yelp Focus: This focus, our ultimate choice, was a dataset easily structured and
 
 Intermediate steps involved designing an interface, parsing and organizing data, and figuring out the Streamlit development platform. Clay parsed and organized the data, Lydia developed intial sketches of visualization interface, and we both investigated the Streamlit visualization platform.\
 
-**< Lydia to insert screenshot of interface design >**\
+![A screenshot of visualization interface sketch. Could be a GIF.](Note Oct 18, 2020.jpg)
 
 **Individual Development**\
-Now we defined our individual development. Clay focussed on the individual viewport and Lydia focussed on the macro scale view port. We both met frequently to discuss progress, ideas, and direction.\
+Now we defined our individual development. Clay focussed on the individual viewport with machine learning and Lydia focussed on the macro scale view port with Altair. We both met frequently to discuss progress, ideas, and direction.\
 
 **Combination & Conclusion**\
 The final process involved combining our code. We both pushed our code to the Github repository and Clay integrated the code. Lydia wrote the writeup. Throughout this process, we met frequently to test the integration, and discuss design changes.
