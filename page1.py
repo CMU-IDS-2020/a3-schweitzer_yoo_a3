@@ -1,7 +1,5 @@
 # CLAY YOO & LYDIA SCHWEITZER Assignment 3
 # Yelp Data visualization using Streamlit
-# code referenced from demo-uper-nyc-pickups
-# https://github.com/streamlit/demo-uber-nyc-pickups/blob/master/streamlit_app.py
 
 # IMPORTS **********************************************************************
 import streamlit as st
@@ -32,14 +30,9 @@ def load_data(dataFile, dateCol = None, nrows = 400000):
     return data
 
 def app():
-    # Create a text element and let the reader know the data is loading.
-    data_load_state = st.text('Loading data...')
-    # Load 10,000 rows of data into the dataframe.
+    # Load 6,000 rows of data into the dataframe.
     bData = load_data(bFile)
     rRawData = load_data(rFile, rDateCol, 6000)
-    #uData = load_data(10000, uFile, uDateCol)
-    # Notify the reader that the data was successfully loaded.
-    # data_load_state.text("Done! (using st.cache)")
 
     # add col to bData for int version of ratings
     bData['starsInt'] = [int(i) for i in bData['stars']]
@@ -60,103 +53,14 @@ def app():
     ################################################################################
     # Titles and Information
     ################################################################################
-    st.title('Restaurant Ratings!')
-    st.header('Check out the ratings of restaurants in Pittsburgh and other major cities, their reviews, and what they have to offer.')
-    ################################################################################
-    # Inspect raw data
-    ################################################################################
-    # def inspectData(title, data):
-    #     st.subheader(title)
-    #     st.write(data)
-    #     st.write("Data written!")
-
-    # st.title('Inspect Data')
-    # inspectData('Business', bSmallData)
-    # inspectData('Review', rSmallData)
-    # #inspectData('User', uSmallData)
-
-    # ################################################################################
-    # # Test Visuals: BAR CHARTS
-    # ################################################################################
-    # st.title('Test Visuals')
-
-    # # BAR CHARTS
-    # st.subheader('Simple Bar Charts')
-    # # specify x and y with (ordial, quantitative, nominal); 'name:O/Q/N'
-    # def barChart(myTitle, data, x, y):
-    #     barChart = alt.Chart(data,title=myTitle).mark_bar().encode(
-    #     alt.X(x),
-    #     alt.Y(y)
-    #     )
-    #     return barChart
-
-    # businessBar = barChart('Business Reviews', bSmallData, 'review_count:Q','name:O')
-    # reviewBar = barChart('Positive Reviews', rSmallData, 'pos:Q','business_id:O')
-    # #userBar = barChart('Person Review Count', uSmallData, 'review_count:Q','name:O')
-    # st.write(businessBar & reviewBar)
-
-    # st.write("Bar charts done!")
-
-    ################################################################################
-    # Exploratory Visuals
-    ################################################################################
-    # PREFERENCE OVER TIME 2
-    rDataFiltered = copy.copy(rData)
-    cola, colb, colc = st.beta_columns(3)
-
-    pref = 'neu'
-    prefTitle = 'Neutral '
-
-    if cola.button('Negative Reviews'):
-        #rDataFiltered = rDataFiltered[rDataFiltered['neg']]
-        pref = 'neg'
-        prefTitle = 'Negative '
-    if colb.button('Positive Reviews'):
-        #rDataFiltered = rDataFiltered[rDataFiltered['pos']]
-        pref = 'pos'
-        prefTitle = 'Positive '
-    if colc.button('Neutral Reviews'):
-        #rDataFiltered = rDataFiltered[rDataFiltered['neu']]
-        pref = 'neu'
-        prefTitle = 'Neutral '
-
-    st.write('Preference Over Time:')
-    methods2 = alt.Chart(rDataFiltered, title = 'Preference Over Time').mark_circle(
-        strokeWidth=2
-    ).encode(
-        alt.X('year:N', title = 'Date', axis=alt.Axis(labelAngle=0)),
-        alt.Y('bcity:N', title = 'City'),
-        alt.Size('count():Q',
-            scale=alt.Scale(range=[0, 4000]),
-            legend=alt.Legend(title='Number of Reviews')),
-        #alt.Opacity(pref, type = 'quantitative', aggregate = 'mean'),
-        alt.Stroke('bcity:N', legend = None),
-        alt.Color(pref, type = 'quantitative', aggregate = 'mean'),
-        alt.Tooltip('neg:Q', aggregate = 'mean')
-    ).properties(
-        height=440,
-        width=800
-    )
-    #st.write(methods2)
-
-    # map total average pref reviews over time
-    total = alt.Chart(rDataFiltered, title= prefTitle + 'Over Time').mark_area(
-        opacity=0.8,
-        color='black'
-    ).encode(
-        alt.X('year:O', axis=alt.Axis(labelAngle=0), title = 'Year'),
-        alt.Y(pref, type = 'quantitative', title = prefTitle + 'Sentiment Average')
-    ).properties(
-        height=150,
-        width = 800
-    )
-
-    st.write(methods2 & total)
-
+    st.title('Explore City-Wide Restaurant Reviews')
+    st.subheader('Check out the ratings of restaurants in Pittsburgh and other major cities, their reviews, and what they have to offer.')
+   
     ################################################################################
     # Maps
     ################################################################################
     # MAP VISUALIZATION
+    st.write('Select one of the three sentiments below to see the concentration of each overtime:')
     # break apart data into city specific data
     pittsburghData = bData.loc[bData['city'] == 'Pittsburgh']
     montrealData = bData.loc[bData['city'] == 'Montréal']
@@ -223,3 +127,58 @@ def app():
     col4.subheader('Toronto')
     col4.map(filteredDataT)
     col4.write(starsBarT)
+    
+    ################################################################################
+    # Exploratory Visuals
+    ################################################################################
+    # PREFERENCE OVER TIME
+    rDataFiltered = copy.copy(rData)
+    cola, colb, colc = st.beta_columns(3)
+
+    pref = 'neu'
+    prefTitle = 'Neutral '
+
+    if cola.button('Negative Reviews'):
+        #rDataFiltered = rDataFiltered[rDataFiltered['neg']]
+        pref = 'neg'
+        prefTitle = 'Negative '
+    if colb.button('Positive Reviews'):
+        #rDataFiltered = rDataFiltered[rDataFiltered['pos']]
+        pref = 'pos'
+        prefTitle = 'Positive '
+    if colc.button('Neutral Reviews'):
+        #rDataFiltered = rDataFiltered[rDataFiltered['neu']]
+        pref = 'neu'
+        prefTitle = 'Neutral '
+
+    st.write('Preference Over Time:')
+    preference = alt.Chart(rDataFiltered, title = 'Preference Over Time').mark_circle(
+        strokeWidth=2
+    ).encode(
+        alt.X('year:N', title = 'Date', axis=alt.Axis(labelAngle=0)),
+        alt.Y('bcity:N', title = 'City'),
+        alt.Size('count():Q',
+            scale=alt.Scale(range=[0, 4000]),
+            legend=alt.Legend(title='Number of Reviews')),
+        #alt.Opacity(pref, type = 'quantitative', aggregate = 'mean'),
+        alt.Stroke('bcity:N', legend = None),
+        alt.Color(pref, type = 'quantitative', aggregate = 'mean'),
+        alt.Tooltip('neg:Q', aggregate = 'mean')
+    ).properties(
+        height=440,
+        width=800
+    )
+
+    # map total average pref reviews over time
+    totalPreference = alt.Chart(rDataFiltered, title= prefTitle + 'Over Time').mark_area(
+        opacity=0.8,
+        color='black'
+    ).encode(
+        alt.X('year:O', axis=alt.Axis(labelAngle=0), title = 'Year'),
+        alt.Y(pref, type = 'quantitative', title = prefTitle + 'Sentiment Average')
+    ).properties(
+        height=150,
+        width = 800
+    )
+
+    st.write(preference & totalPreference)
