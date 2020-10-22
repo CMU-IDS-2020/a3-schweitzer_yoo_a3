@@ -71,7 +71,7 @@ def app():
 
     # slider and data from user input
     #st.map(bData)
-    selectedStars = st.slider('Select ratings:', 0, 5, (0,5))
+    selectedStars = st.sidebar.slider('Filter maps by selecting ratings:', 0, 5, (0,5))
     filteredDataP = pittsburghData[(pittsburghData['starsInt'] >= selectedStars[0]) & (pittsburghData['starsInt'] <= selectedStars[1])]
     filteredDataM = montrealData[(montrealData['starsInt'] >= selectedStars[0]) & (montrealData['starsInt'] <= selectedStars[1])]
     filteredDataC = clevelandData[(clevelandData['starsInt'] >= selectedStars[0]) & (clevelandData['starsInt'] <= selectedStars[1])]
@@ -137,6 +137,8 @@ def app():
 
     pref = 'neu'
     prefTitle = 'Neutral '
+    st.subheader('View colorized sentiment overtime.')
+    st.write('Select review type to filter preference overtime')
 
     if cola.button('Negative Reviews'):
         #rDataFiltered = rDataFiltered[rDataFiltered['neg']]
