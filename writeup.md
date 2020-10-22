@@ -43,7 +43,7 @@ Yelp Focus: This focus, our ultimate choice, was a dataset easily structured and
 
 Intermediate steps involved designing an interface, parsing and organizing data, and figuring out the Streamlit development platform. Clay parsed and organized the data, Lydia developed intial sketches of visualization interface, and we both investigated the Streamlit visualization platform.\
 
-![A screenshot of visualization interface sketch. Could be a GIF.](interfaceSketch.jpg)
+![A screenshot of visualization interface sketch. Could be a GIF.](interfaceSketchA3.jpg)
 
 **Individual Development**\
 Now we defined our individual development. Clay focussed on the individual viewport with machine learning and Lydia focussed on the macro scale view port with Altair. We both met frequently to discuss progress, ideas, and direction.\
