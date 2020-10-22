@@ -44,7 +44,7 @@ def round_(x):
     return round(x, 4)
 
 
-@st.cache()
+@st.cache(allow_output_mutation=True)
 def load_data(filename):
     data = pd.read_csv(path.join(DATA_DIR, filename), index_col=None)
     lowercase = lambda x: str(x).lower()

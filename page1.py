@@ -22,7 +22,7 @@ rFile, rDateCol = 'DATA/review.csv', 'date' # reviews file
 #uFile, uDateCol = 'user.csv', 'yelping_since' # user file
 
 #dataFile = bFile
-@st.cache()
+@st.cache(allow_output_mutation=True)
 def load_data(dataFile, dateCol = None, nrows = 400000):
     data = pd.read_csv(dataFile, nrows = nrows)
     lowercase = lambda x: str(x).lower()
