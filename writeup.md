@@ -1,6 +1,7 @@
 # Project name
 
-![A screenshot of your application. Could be a GIF.](screenshot.png)
+![A screenshot of macro view. Could be a GIF.](macroViewA3.jpg)
+![A screenshot of individual view. Could be a GIF.](individualViewA3.jpg)
 
 TODO: Short abstract describing the main goals and how you achieved them.
 
