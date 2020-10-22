@@ -19,7 +19,7 @@ st.beta_set_page_config(layout="wide")
 # DATA SETUP
 ################################################################################
 bFile = 'business.csv' # business file
-rFile, rDateCol = 'reviewCity.csv', 'date' # reviews file
+rFile, rDateCol = 'reviewCity - Copy.csv', 'date' # reviews file
 #uFile, uDateCol = 'user.csv', 'yelping_since' # user file
 
 #dataFile = bFile
