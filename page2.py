@@ -108,13 +108,13 @@ def app():
     ####
     # WIDGETS (on the sidebar)
     ####
-    display_by = st.sidebar.radio("Select the variable to display with",
+    city = st.sidebar.radio("Select the city you want to view", CITIES)
+    display_by = st.sidebar.radio("Select the variable to display with\n(chosen one: height, the other: color)",
                                   ["review_count", "stars"])
     second = "stars" if display_by == "review_count" else "review_count"
     star_range = st.sidebar.slider("Select minimum star (inclusive)", 0, 5, (0, 5))
     price_range = st.sidebar.slider("Price range",
                                     0, 5, (1, 3))
-    city = st.sidebar.radio("Select the city you want to view", CITIES)
 
     # FIRST ROW
     row1_1, row1_2 = st.beta_columns((1, 2))
@@ -151,13 +151,15 @@ def app():
                            (top_business_data["stars"] <= star_range[1])]
          .sort_values([display_by, second], ascending=False))
 
+    sentiment_chosen = False
     sentiment_success = False
     with row1_1:
         st.write(f"**Top 20 Restaurants in {city}**")
         st.write(top_business_data[["name", "address", "stars", "review_count"]]
                  .head(20).reset_index(drop=True))
 
-        restaurant_name = st.text_input("Choose the restaurant you want to analyze")
+        restaurant_name = st.text_input("Type the name of the restaurant you want to analyze "
+                                        "positive/negative sentiment")
         restaurant_id = top_business_data[top_business_data["name"] ==
                                       restaurant_name]["business_id"]
         if len(restaurant_id):
@@ -179,6 +181,7 @@ def app():
                     with **{round_(review_data['pos'].mean())}** avg. **positive** sentiment\n
                     with **{round_(review_data['neg'].mean())}** avg. **neutral** sentiment\n
                     with **{round_(review_data['neu'].mean())}** avg. **negative** sentiment\n
+                    (* sentiment ranges from [0.0, 1.0])
                     """)
                 sentiment_success = True
 
@@ -186,8 +189,7 @@ def app():
     with row1_2:
         st.write(
         """
-        # Restaurants in 4 Major Cities in North America
-        ##
+        Look around the city and try to find which restaurant you want to visit!\n
         """)
         map(business_data, display_by, second, midpoint[0], midpoint[1], 11)
 
@@ -199,72 +201,88 @@ def app():
         with row2_1:
             what = st.radio("Choose the sentiment to analyze",
                             ["pos", "neu", "neg"])
+        row2_success = True
         with row2_2:
-            delta = st.text_input("Choose the average amount to change (e.g. -0.2, +0.1)")
+            delta = st.text_input("Choose the average amount to change (e.g. -0.2, 0.1)")
             try:
                 delta = float(delta)
+                if delta > 1:
+                    delta = 1.0
+                elif delta < -1:
+                    delta = -1
             except:
                 if delta != "":
                     st.write("Invalid value is given as the average amount to change.")
-                return
+                row2_success = False
 
-        sign = "decreases" if delta < 0 else "increases"
-        delta = abs(delta)
+        if row2_success:
+            sign = "decrease" if delta < 0 else "increase"
+            delta = abs(delta)
 
-        if what == "pos":
-            w = coef[-3]
-        elif what == "neu":
-            w = coef[-2]
-        else:
-            w = coef[-1]
+            if what == "pos":
+                w = coef[-3]
+            elif what == "neu":
+                w = coef[-2]
+            else:
+                w = coef[-1]
 
-        rating = \
-            (business_data[business_data["business_id"] == restaurant_id]
-             ["stars"].iloc[0])
-        if sign == "decreases":
-            rating = max(0, rating + w * delta)
-        else:
-            rating = min(5.0, rating + w * delta)
+            o_rating = \
+                (business_data[business_data["business_id"] == restaurant_id]
+                 ["stars"].iloc[0])
+            if sign == "decrease":
+                rating = max(0, o_rating + w * delta)
+            else:
+                rating = min(5.0, o_rating + w * delta)
 
-        with row2_3:
+            with row2_3:
+
+                st.write(
+                    f"""
+                    For the restaurant owner: \n
+                    If **{restaurant_name}** {sign}s **{what} sentiment**
+                    by **{delta}**, it's average rating will reach **{rating}**!!
+                    """)
+
+        try:
+            st.altair_chart(alt.Chart(review_data)
+                .mark_line(
+                    interpolate='step-after',
+                ).encode(
+                    x=alt.X("date:T", scale=alt.Scale(nice=False)),
+                    y=alt.Y("pos:Q"),
+                    tooltip=["date", "pos"]
+                ).configure_mark(
+                    opacity=0.5,
+                    color='red'
+                ), use_container_width=True)
+
+            st.altair_chart(alt.Chart(review_data)
+                .mark_line(
+                    interpolate='step-after',
+                ).encode(
+                    x=alt.X("date:T", scale=alt.Scale(nice=False)),
+                    y=alt.Y("neu:Q"),
+                    tooltip=["date", "neu"]
+                ).configure_mark(
+                    opacity=0.5,
+                    color='red'
+                ), use_container_width=True)
+
+            st.altair_chart(alt.Chart(review_data)
+                .mark_line(
+                    interpolate='step-after',
+                ).encode(
+                    x=alt.X("date:T", scale=alt.Scale(nice=False)),
+                    y=alt.Y("neg:Q"),
+                    tooltip=["date", "neg"]
+                ).configure_mark(
+                    opacity=0.5,
+                    color='red'
+                ), use_container_width=True)
+        except:
             st.write(
                 f"""
-                If {restaurant_name} {sign} {what} sentiment by {delta},
-                it's average rating will reach {rating}!!
-                """)
-
-        st.altair_chart(alt.Chart(review_data)
-            .mark_line(
-                interpolate='step-after',
-            ).encode(
-                x=alt.X("date:T", scale=alt.Scale(nice=False)),
-                y=alt.Y("pos:Q"),
-                tooltip=["date", "pos"]
-            ).configure_mark(
-                opacity=0.5,
-                color='red'
-            ), use_container_width=True)
-
-        st.altair_chart(alt.Chart(review_data)
-            .mark_line(
-                interpolate='step-after',
-            ).encode(
-                x=alt.X("date:T", scale=alt.Scale(nice=False)),
-                y=alt.Y("neu:Q"),
-                tooltip=["date", "neu"]
-            ).configure_mark(
-                opacity=0.5,
-                color='red'
-            ), use_container_width=True)
-
-        st.altair_chart(alt.Chart(review_data)
-            .mark_line(
-                interpolate='step-after',
-            ).encode(
-                x=alt.X("date:T", scale=alt.Scale(nice=False)),
-                y=alt.Y("neg:Q"),
-                tooltip=["date", "neg"]
-            ).configure_mark(
-                opacity=0.5,
-                color='red'
-            ), use_container_width=True)
+                Oh no! **{restaurant_name}** sentiment chart is not available!\n
+                Please try a different restaurant.
+                """
+                )
