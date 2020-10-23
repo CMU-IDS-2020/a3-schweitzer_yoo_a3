@@ -1,7 +1,7 @@
 # CMU Interactive Data Science Assigment 3
 
-* **Team members**: XXXX and XXXX
-* **Online URL**: https://s4a.streamlit.io/cmu-ids-2020/a3-template/master/streamlit_app.py/+/
+* **Team members**: Lydia Schweitzer and Clay Yoo
+* **Online URL**: https://share.streamlit.io/cmu-ids-2020/a3-schweitzer_yoo_a3?
 
 ## Instructions
 
