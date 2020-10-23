@@ -1,4 +1,4 @@
-# Project name
+# Find Your Favorite Restaurant in Your Neighbor!
 
 ![A screenshot of macro view. Could be a GIF.](macroViewA3.jpg)
 ![A screenshot of individual view. Could be a GIF.](individualViewA3.jpg)
